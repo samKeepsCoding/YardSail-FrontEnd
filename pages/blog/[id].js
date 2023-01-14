@@ -48,10 +48,6 @@ const blogPost = ({selectedPost, posts, categories}) => {
         <div className='w-[72rem] flex flex-col-reverse md:flex-row'>
             <BlogSideBar posts={posts} categories={categories}/>
             <BlogArticleCard post={selectedPost[0]}/>
-            {/* <div className='flex flex-col justify-start items-center w-full border'>
-                <h1>{selectedPost[0].title}</h1>
-                <p className='mt-8'>{selectedPost[0].body}</p>                  
-            </div> */}
         </div>
 
         </div>

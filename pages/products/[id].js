@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../lib/Redux/cart.slice";
 
 // Components
 import ProductDescription from "../../components/ProductDescription";
@@ -50,6 +52,8 @@ export const getStaticPaths = async () => {
     const [showReviewForm, setShowReviewForm] = useState(false)
     const [showZoomImage, setShowZoomImage] = useState(false)
 
+    const dispatch = useDispatch();
+
 
     const increaseQty = () => {
         setQty(qty + 1)
@@ -67,30 +71,6 @@ export const getStaticPaths = async () => {
             
             <div className="flex flex-col md:flex-row justify-center items-start max-w-5xl mt-4 " > 
                 <div className="relative flex flex-col justify-center mb-8 md:mb-0 items-center  md:mr-4 border rounded-md w-full md:w-1/2">
-                    {/* <div className="flex flex-row flex-wrap justify-start items-start ">
-                        {product.images.map(image => (
-                            <>
-                                <div className="relative"> 
-                                    <Image
-                                        src={image}
-                                        width={90}
-                                        height={150}
-                                        className='rounded-sm mr-2'
-                                        key={product.images.indexOf(image)}
-                                        onClick={() => setMainPic(image)}
-                                    /> 
-                                </div>
-                            </>
-                        ))}
-                        <Image
-                            src={product.category.image}
-                            width={90}
-                            height={100}
-                            className='rounded-sm'
-                            onClick={() => setMainPic(product.category.image)}
-                        />
-
-                    </div> */}
                         <Image
                             src={product.image}
                             width={300}
@@ -125,8 +105,13 @@ export const getStaticPaths = async () => {
                             <button type="button" onClick={increaseQty}>+</button>
                             <button type="button" onClick={decreaseQty}>-</button>
                         </div>
-                        <button type="submit" className="rounded-full py-3 px-4 bg-[#c4c3c3] text-white flex flex-row items-center  hover:bg-[#878787] duration-100 ease-in-out cursor-not-allowed"> <AiFillShopping size={22}/>
-                        <p className="ml-2">ADD TO CART</p>
+                        <button 
+                            type="submit" 
+                            className="rounded-full py-3 px-4 bg-[#c4c3c3] text-white flex flex-row items-center  hover:bg-[#878787] duration-100 ease-in-out cursor-not-allowed"
+                            onClick={() => dispatch(addToCart(product))}
+                        > 
+                            <AiFillShopping size={22}/>
+                            <p className="ml-2">ADD TO CART</p>
                         </button>
 
                         <button className="rounded-full p-4 bg-[#c4c3c3] hover:bg-[#878787]">

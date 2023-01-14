@@ -6,11 +6,6 @@ import Card from '../components/Card'
 import { motion } from 'framer-motion'
 
 export const getStaticProps = async (context) => {
-  // const res = await fetch('https://api.escuelajs.co/api/v1/products/');
-  // const data = await res.json();
-
-  // const result = await fetch('https://api.escuelajs.co/api/v1/categories');
-  // const categories = await result.json();
 
   const res = await fetch('https://fakestoreapi.com/products/');
   const data = await res.json()

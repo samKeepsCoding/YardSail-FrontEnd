@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from "framer-motion"
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../lib/Redux/cart.slice'
+
+// Icons
 import { AiOutlineHeart, AiFillShopping, AiFillStar } from 'react-icons/ai'
 import { MdOutlineSearch } from 'react-icons/md' 
-import Link from 'next/link'
 
 
 
 const Card = ({item}) => {
 
     const [isOpen, setIsOpen] = useState(false)
-
     const variants = {
         open: { opacity: 1, y: 0 },
         closed: { opacity: 0, y: "25%" },
       }
+
+    const dispatch = useDispatch()
 
     
   return (
