@@ -1,9 +1,14 @@
+import React,{useState} from 'react'
 import Head from 'next/head'
-import React, {useState, useEffect} from 'react'
+import Link from 'next/link'
 import { result, slice } from 'lodash'
+import { motion } from 'framer-motion'
+import { ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+// Components
 import Header from '../components/Header'
 import Card from '../components/Card'
-import { motion } from 'framer-motion'
 
 export const getStaticProps = async (context) => {
 
@@ -40,11 +45,24 @@ const Home = ({ products, categories, firstTen }) => {
     }
 
   }
+
   return (
 
 
     <>
     <Header/>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     <div className='w-full flex flex-col justify-center items-center font-Poppins text-black mt-8 px-4 '>
         <div className='text-center flex flex-col justify-center items-center mt-6 max-w-7xl'>
             <h3 className='text-xs font-medium text-[#bbb]'>DISCOVER OUR NEW PRODUCTS</h3>
@@ -57,7 +75,9 @@ const Home = ({ products, categories, firstTen }) => {
                 {categories.map((category) => {
                       return (
                       <>
+                        <Link href={`/products/category/${category}`}>
                           <button className='p-0 border-0 cursor-pointer text-sm font-thin hover:font-normal mt-1' >{category.charAt(0).toUpperCase() + category.slice(1)}</button>
+                        </Link>
                       </>
                       )
                   })}

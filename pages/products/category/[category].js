@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
-import fetch from 'isomorphic-unfetch'
-// components
+import fetch from 'isomorphic-unfetch' 
+
+// React Toastify Imports 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Component Imports
 import Card from '../../../components/Card';
 import RowCard from '../../../components/RowCard';
-// icons
+
+// Icon Imports 
 import { HiSquares2X2 } from 'react-icons/hi2'
 import { HiMenu } from 'react-icons/hi'
 
@@ -44,6 +50,18 @@ function Category() {
   
   return (
     <>
+      <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
       <div className='w-full flex justify-center items-center '>
         <div className='w-[72rem] flex flex-col justify-start items-center '>
           <div className='w-full flex flex-col pt-4 pl-[4rem]'>

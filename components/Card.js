@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { motion } from "framer-motion"
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../lib/Redux/cart.slice'
+import { ToastContainer, toast } from 'react-toastify'
+
+
 
 // Icons
 import { AiOutlineHeart, AiFillShopping, AiFillStar } from 'react-icons/ai'
@@ -18,14 +21,15 @@ const Card = ({item}) => {
         open: { opacity: 1, y: 0 },
         closed: { opacity: 0, y: "25%" },
       }
-
+      
     const dispatch = useDispatch()
 
     
   return (
     <>
+
+        
         <div className='relative h-full ml-2 inline-block cursor-pointer  hover:scale-105 ease-in-out duration-300'>
-            
             <div 
                 className='flex flex-col justify-center items-center space-y-3 m-4 space-x-3  max-w-sm '
                 
@@ -41,21 +45,24 @@ const Card = ({item}) => {
                     />
                     
                             <div 
-                                className='flex flex-row items-end justify-center space-x-3 absolute top-0 h-full w-full pb-4  '
+                                className='flex flex-row items-end justify-center space-x-3 absolute top-0 h-full w-full pb-4'
                                 onMouseEnter={() => setIsOpen(isOpen => !isOpen)}
                                 onMouseLeave={() => setIsOpen(isOpen => !isOpen)}
-                            >                
-                                <motion.div 
+                            >         
+
+                                <motion.button 
                                     className=' flex items-center justify-center rounded-full border bg-gray-100 p-2 cursor-pointer hover:scale-125 ease-in-out duration-100'
                                     animate={isOpen ? "open" : "closed"}
                                     variants={variants}
                                     transition={{
                                         duration: 0.2,
                                     }}
+                                    onClick={() => dispatch(addToCart(item))}
                                 >
                                     <AiFillShopping size={18}/>
-                                </motion.div>
-                                <motion.div 
+                                </motion.button>
+
+                                {/* <motion.div 
                                     className=' flex items-center justify-center rounded-full border bg-gray-100 p-2 cursor-pointer hover:scale-125 ease-in-out duration-100'
                                     animate={isOpen ? "open" : "closed"}
                                     variants={variants}
@@ -65,7 +72,8 @@ const Card = ({item}) => {
                                     }}
                                 >
                                     <AiOutlineHeart size={18}/>
-                                </motion.div>
+                                </motion.div> */}
+
                                 <motion.div 
                                     className=' flex items-center justify-center rounded-full border bg-gray-100 p-2 cursor-pointer hover:scale-125 ease-in-out duration-100'
                                     animate={isOpen ? "open" : "closed"}
@@ -77,7 +85,6 @@ const Card = ({item}) => {
                                 >
                                     <Link href={'/products/' + item.id}>
                                         <MdOutlineSearch size={18} className='z-40'/>
-                                    
                                     </Link>
                                 </motion.div>   
                             </div>
@@ -85,7 +92,9 @@ const Card = ({item}) => {
                         
                 </div>
                     <div className='flex flex-row items-center w-sm'>
-                        <h4 className='text-xs font-medium text-[#bbb] cursor-pointer flex-wrap text-center m-0'>{item.title}</h4>
+                        <Link href={`/products/${item.id}`}>
+                            <h4 className='text-xs font-medium text-[#bbb] cursor-pointer flex-wrap text-center m-0'>{item.title}</h4>
+                        </Link>
                     </div>
                         
                         <div className='text-center bg-[#444] rounded-sm items-center justify-center px-2 py-1'>
@@ -102,6 +111,8 @@ const Card = ({item}) => {
                     <p>${item.price}</p>
             </div>
         </div>
+
+        
     </>
   )
 }

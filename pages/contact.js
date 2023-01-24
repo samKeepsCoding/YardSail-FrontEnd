@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
+
 // components
 import ContactForm from '../components/ContactForm'
+
 // icons
 import { AiOutlineMail,AiOutlinePhone } from 'react-icons/ai'
 import { IoLocationOutline } from 'react-icons/io5'

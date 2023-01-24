@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import React, {useState} from 'react'
 import { motion } from 'framer-motion'
+
+// Icons
 import { AiFillCloseCircle, AiFillStar } from 'react-icons/ai'
 import { RiFileEditLine } from 'react-icons/ri'
 
@@ -11,7 +13,7 @@ const ReviewForm = ({product, handleReviewForm}) => {
     const [name, setName] = useState(null)
   return (
     <>
-        <div className='w-full h-screen absolute top-0 bottom-0 z-40 flex justify-center items-center bg-[#666666] bg-opacity-50'>
+        <div className='fixed w-full h-screen top-0 bottom-0 z-40 flex justify-center items-center bg-[#666666] bg-opacity-50'>
             
             <motion.div 
                 className='relative flex flex-col z-200 bg-white p-4 max-w-lg  rounded-md'

@@ -1,15 +1,23 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../lib/Redux/cart.slice";
+import { useState } from "react";
 
-// Components
-import ProductDescription from "../../components/ProductDescription";
-import ProductDetail from "../../components/ProductDetail";
+// Redux Imports 
+import { useDispatch } from "react-redux";
+import { 
+    addToCart, 
+    incrementQuantity,  
+    decrementQuantity,
+} from "../../lib/Redux/cart.slice";
+
+// React Toastify imports 
+import { ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+// Component Imports
 import ReviewForm from "../../components/ReviewForm";
 import  CategorySection from "../../components/CategorySection";
 
-// Icons
+// Icon Imports
 import { AiFillShopping, AiFillHeart, AiOutlineShareAlt, AiFillPrinter, AiFillStar, AiOutlineExpandAlt } from 'react-icons/ai'
 import { RiFileEditLine } from 'react-icons/ri'
 import ZoomImage from "../../components/ZoomImage";
@@ -46,27 +54,28 @@ export const getStaticPaths = async () => {
   
   const Details = ({ product }) => {
 
-    const [mainPic, setMainPic] = useState(product.image)
-    const [qty, setQty] = useState(1)
-    const [toggle, setToggle] = useState('description')
     const [showReviewForm, setShowReviewForm] = useState(false)
     const [showZoomImage, setShowZoomImage] = useState(false)
 
     const dispatch = useDispatch();
 
 
-    const increaseQty = () => {
-        setQty(qty + 1)
-    }
 
-    const decreaseQty = () => {
-        if (qty != 0) {
-            setQty(qty - 1)
-        }
-    }
 
     return (
      <>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
         <div className="flex justify-center">
             
             <div className="flex flex-col md:flex-row justify-center items-start max-w-5xl mt-4 " > 
@@ -93,30 +102,30 @@ export const getStaticPaths = async () => {
                     <div className="border-dashed w-full border-t-[2px] mt-6"></div>
 
                     <div className="flex flex-row justify-start items-center mt-5 space-x-3">
-                        <p className="">QTY:</p>
+                        {/* <p className="">QTY:</p>
 
                         <input 
                             type='text'
                             className="border rounded-sm text-center w-11 py-2"
-                            value={qty}
+                            value={product.quantity}
                         />
 
                         <div className="flex flex-col">
-                            <button type="button" onClick={increaseQty}>+</button>
-                            <button type="button" onClick={decreaseQty}>-</button>
-                        </div>
+                            <button type="button" onClick={() => incrementQuantity(product.id)}>+</button>
+                            <button type="button" onClick={() => decrementQuantity(product.id)}>-</button>
+                        </div> */}
                         <button 
                             type="submit" 
-                            className="rounded-full py-3 px-4 bg-[#c4c3c3] text-white flex flex-row items-center  hover:bg-[#878787] duration-100 ease-in-out cursor-not-allowed"
+                            className="rounded-full py-3 px-4 bg-[#222222] text-white flex flex-row items-center  hover:bg-[#878787] duration-100 ease-in-out cursor-pointer"
                             onClick={() => dispatch(addToCart(product))}
                         > 
                             <AiFillShopping size={22}/>
                             <p className="ml-2">ADD TO CART</p>
                         </button>
 
-                        <button className="rounded-full p-4 bg-[#c4c3c3] hover:bg-[#878787]">
+                        {/* <button className="rounded-full p-4 bg-[#c4c3c3] hover:bg-[#878787]">
                             <AiFillHeart size={15} className='fill-white '/>
-                        </button>
+                        </button> */}
                     </div>
 
                     <div className="border-dashed w-full border-t-[2px] mt-7"></div>
